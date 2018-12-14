@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.AssassinG.ScsyERP.common.entity.BaseEntity">
+
+    <resultMap id="BaseEntityMap" type="cn.AssassinG.ScsyERP.common.entity.BaseEntity">
+        <id column="id" property="Id" />
+        <result column="corporation" property="Corporation" />
+        <result column="create_time" property="CreateTime" />
+        <result column="update_time" property="UpdateTime" />
+        <result column="delete_time" property="DeleteTime" />
+        <result column="is_deleted" property="IfDeleted" />
+    </resultMap>
+
+    <resultMap id="LoginableEntityMap" extends="BaseEntityMap" type="cn.AssassinG.ScsyERP.common.entity.LoginableEntity">
+        <result column="name" property="Name" />
+    </resultMap>
+
+    <resultMap id="UnLoginableEntityMap" extends="BaseEntityMap" type="cn.AssassinG.ScsyERP.common.entity.UnLoginableEntity">
+        <result column="name" property="Name" />
+        <result column="phone" property="Phone" />
+    </resultMap>
+
+    <resultMap id="FormEntityMap" extends="BaseEntityMap" type="cn.AssassinG.ScsyERP.common.entity.FormEntity">
+        <result column="if_completed" property="IfCompleted" />
+    </resultMap>
+
+</mapper>
