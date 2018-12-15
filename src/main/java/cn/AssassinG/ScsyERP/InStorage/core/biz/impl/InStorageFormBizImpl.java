@@ -275,7 +275,7 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
         }
         inStorageForm.getProducts().remove(product.getId());
         if(inStorageForm.getWorkingProduct().longValue() == product.getId()){
-            inStorageForm.setWorkingProduct(null);
+            inStorageForm.setWorkingProduct(null);//todo 如果这个为空，货物定位上传了该怎么办。可以实现setWorkingProduct接口
         }
         this.update(inStorageForm);
     }
@@ -310,6 +310,11 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
             product.setWarehouseLocation(Location);
             productServiceFacade.update(product);
         }
+    }
+
+    @Override
+    public void setWorkingProduct(Long entityId, Long productId) {
+        //todo
     }
 
     @Override

@@ -11,4 +11,5 @@ public interface InStorageFormBiz extends FormBiz<InStorageForm> {
     void addProduct(Long entityId, Long productId);
     void removeProduct(Long entityId, Long productId);
     void updateProductLocation(Long Warehouse, String Location);
+    void setWorkingProduct(Long entityId, Long productId);
 }
