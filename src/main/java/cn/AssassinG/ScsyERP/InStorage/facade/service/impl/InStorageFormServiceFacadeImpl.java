@@ -18,25 +18,25 @@ public class InStorageFormServiceFacadeImpl extends FormServiceImpl<InStorageFor
         return this.inStorageFormBiz;
     }
 
-    @Override
-    public void addDriveWorkers(Long entityId, String jsonArrayStr) {
-        this.inStorageFormBiz.addDriveWorkers(entityId, jsonArrayStr);
-    }
-
-    @Override
-    public void removeDriveWorker(Long entityId, Long driveWorkerId) {
-        this.inStorageFormBiz.removeDriveWorker(entityId, driveWorkerId);
-    }
-
-    @Override
-    public void addLiftWorkers(Long entityId, String jsonArrayStr) {
-        this.inStorageFormBiz.addLiftWorkers(entityId, jsonArrayStr);
-    }
-
-    @Override
-    public void removeLiftWorker(Long entityId, Long liftWorkerId) {
-        this.inStorageFormBiz.removeLiftWorker(entityId, liftWorkerId);
-    }
+//    @Override
+//    public void addDriveWorkers(Long entityId, String jsonArrayStr) {
+//        this.inStorageFormBiz.addDriveWorkers(entityId, jsonArrayStr);
+//    }
+//
+//    @Override
+//    public void removeDriveWorker(Long entityId, Long driveWorkerId) {
+//        this.inStorageFormBiz.removeDriveWorker(entityId, driveWorkerId);
+//    }
+//
+//    @Override
+//    public void addLiftWorkers(Long entityId, String jsonArrayStr) {
+//        this.inStorageFormBiz.addLiftWorkers(entityId, jsonArrayStr);
+//    }
+//
+//    @Override
+//    public void removeLiftWorker(Long entityId, Long liftWorkerId) {
+//        this.inStorageFormBiz.removeLiftWorker(entityId, liftWorkerId);
+//    }
 
     @Override
     public void addProduct(Long entityId, Long productId) {
