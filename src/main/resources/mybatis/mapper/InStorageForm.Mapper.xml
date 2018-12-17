@@ -14,8 +14,8 @@
         <result column="truck" property="Truck" />
         <result column="pick_worker" property="PickWorker" />
         <result column="lister" property="Lister" />
-        <result column="drive_workers" property="DriveWorkers" typeHandler="cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler" />
-        <result column="lift_workers" property="LiftWorkers" typeHandler="cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler" />
+        <!--<result column="drive_workers" property="DriveWorkers" typeHandler="cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler" />-->
+        <!--<result column="lift_workers" property="LiftWorkers" typeHandler="cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler" />-->
         <result column="account_status" property="AccountStatus" typeHandler="cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.AccountStatusHandler" />
         <result column="total_amount" property="TotalAmount" />
         <result column="total_volume" property="TotalVolume" />
@@ -25,15 +25,15 @@
 	</resultMap>
 
 	<insert id="insert" parameterType="InStorageFormBean" keyProperty="id" useGeneratedKeys="true">
-		insert into <include refid="t_in_storage_form"/> (corporation, create_time, update_time, delete_time, is_deleted, project, instorage_status, instorage_number, instorage_time, warehouse, truck, pick_worker, lister, drive_workers, lift_workers, account_status, total_amount, total_volume, total_weight, products, if_completed)
-		values (#{Corporation}, now(), now(), NULL , FALSE, #{Project}, #{InStorageStatus,typeHandler=cn.AssassinG.ScsyERP.InStorage.core.dao.MyBatisHandler.InStorageStatusHandler}, #{InStorageNumber}, #{InStorageTime}, #{Warehouse}, #{Truck}, #{PickWorker}, #{Lister}, #{DriveWorkers,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler}, #{LiftWorkers,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler}, #{AccountStatus,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.AccountStatusHandler}, #{TotalAmount}, #{TotalVolume}, #{TotalWeight}, #{Products,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler}, #{IfCompleted})
+		insert into <include refid="t_in_storage_form"/> (corporation, create_time, update_time, delete_time, is_deleted, project, instorage_status, instorage_number, instorage_time, warehouse, truck, pick_worker, lister, account_status, total_amount, total_volume, total_weight, products, if_completed)
+		values (#{Corporation}, now(), now(), NULL , FALSE, #{Project}, #{InStorageStatus,typeHandler=cn.AssassinG.ScsyERP.InStorage.core.dao.MyBatisHandler.InStorageStatusHandler}, #{InStorageNumber}, #{InStorageTime}, #{Warehouse}, #{Truck}, #{PickWorker}, #{Lister}, #{AccountStatus,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.AccountStatusHandler}, #{TotalAmount}, #{TotalVolume}, #{TotalWeight}, #{Products,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler}, #{IfCompleted})
 	</insert>
 
 	<insert id="batchInsert" parameterType="List" keyProperty="id" useGeneratedKeys="true">
-		insert into <include refid="t_in_storage_form"/> (corporation, create_time, update_time, delete_time, is_deleted, project, instorage_status, instorage_number, instorage_time, warehouse, truck, pick_worker, lister, drive_workers, lift_workers, account_status, total_amount, total_volume, total_weight, products, if_completed)
+		insert into <include refid="t_in_storage_form"/> (corporation, create_time, update_time, delete_time, is_deleted, project, instorage_status, instorage_number, instorage_time, warehouse, truck, pick_worker, lister, account_status, total_amount, total_volume, total_weight, products, if_completed)
 		values
         <foreach collection="list" item="obj" separator=",">
-            (#{obj.Corporation}, now(), now(), NULL, FALSE, #{obj.Project}, #{obj.InStorageStatus,typeHandler=cn.AssassinG.ScsyERP.InStorage.core.dao.MyBatisHandler.InStorageStatusHandler}, #{obj.InStorageNumber}, #{obj.InStorageTime}, #{obj.Warehouse}, #{obj.Truck}, #{obj.PickWorker}, #{obj.Lister}, #{obj.DriveWorkers,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler}, #{obj.LiftWorkers,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler}, #{obj.AccountStatus,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.AccountStatusHandler}, #{obj.TotalAmount}, #{obj.TotalVolume}, #{obj.TotalWeight}, #{obj.Products,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler}, #{obj.IfCompleted})
+            (#{obj.Corporation}, now(), now(), NULL, FALSE, #{obj.Project}, #{obj.InStorageStatus,typeHandler=cn.AssassinG.ScsyERP.InStorage.core.dao.MyBatisHandler.InStorageStatusHandler}, #{obj.InStorageNumber}, #{obj.InStorageTime}, #{obj.Warehouse}, #{obj.Truck}, #{obj.PickWorker}, #{obj.Lister}, #{obj.AccountStatus,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.AccountStatusHandler}, #{obj.TotalAmount}, #{obj.TotalVolume}, #{obj.TotalWeight}, #{obj.Products,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler}, #{obj.IfCompleted})
         </foreach>
 	</insert>
 	
@@ -46,8 +46,8 @@
 			truck = #{Truck},
             pick_worker =  #{PickWorker},
             lister =  #{Lister},
-            drive_workers = #{DriveWorkers,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler},
-            lift_workers = #{LiftWorkers,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler},
+#             drive_workers = #{DriveWorkers,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler},
+#             lift_workers = #{LiftWorkers,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler},
             account_status =  #{AccountStatus,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.AccountStatusHandler},
             total_amount =  #{TotalAmount},
             total_volume =  #{TotalVolume},
@@ -104,20 +104,20 @@
                     </if>
                 </foreach>
             </trim>
-            <trim prefix="drive_workers =case" suffix="end,">
-                <foreach collection="list" item="item">
-                    <if test="item.DriveWorkers!=null">
-                        when id=#{item.Id} then #{item.DriveWorkers,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler}
-                    </if>
-                </foreach>
-            </trim>
-            <trim prefix="lift_workers =case" suffix="end,">
-                <foreach collection="list" item="item">
-                    <if test="item.LiftWorkers!=null">
-                        when id=#{item.Id} then #{item.LiftWorkers,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler}
-                    </if>
-                </foreach>
-            </trim>
+            <!--<trim prefix="drive_workers =case" suffix="end,">-->
+                <!--<foreach collection="list" item="item">-->
+                    <!--<if test="item.DriveWorkers!=null">-->
+                        <!--when id=#{item.Id} then #{item.DriveWorkers,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler}-->
+                    <!--</if>-->
+                <!--</foreach>-->
+            <!--</trim>-->
+            <!--<trim prefix="lift_workers =case" suffix="end,">-->
+                <!--<foreach collection="list" item="item">-->
+                    <!--<if test="item.LiftWorkers!=null">-->
+                        <!--when id=#{item.Id} then #{item.LiftWorkers,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler}-->
+                    <!--</if>-->
+                <!--</foreach>-->
+            <!--</trim>-->
             <trim prefix="account_status =case" suffix="end,">
                 <foreach collection="list" item="item">
                     <if test="item.AccountStatus!=null">
