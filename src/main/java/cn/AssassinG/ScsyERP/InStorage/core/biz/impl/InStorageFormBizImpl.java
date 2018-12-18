@@ -26,6 +26,7 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
     }
 
     //TODO 从仓库引入行车工，起重工，出库单同理
+    @Override
     public Long create(InStorageForm inStorageForm) {
         ValidUtils.ValidationWithExp(inStorageForm);
         Map<String, Object> queryMap = new HashMap<String, Object>();
