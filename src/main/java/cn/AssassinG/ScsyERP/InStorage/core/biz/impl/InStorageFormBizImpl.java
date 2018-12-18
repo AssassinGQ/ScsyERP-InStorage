@@ -71,7 +71,7 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
             Long truck = paramMap.get("truck") == null ? null : Long.valueOf(paramMap.get("truck"));
             Long pickWorker = paramMap.get("pickWorker") == null ? null : Long.valueOf(paramMap.get("pickWorker"));
             Long lister = paramMap.get("lister") == null ? null : Long.valueOf(paramMap.get("lister"));
-            AccountStatus accountStatus = paramMap.get("accountStatus") == null ? null : AccountStatus.getEnum(Integer.parseInt(paramMap.get("accountStatus")));
+            String accountStatusstr = paramMap.get("accountStatus");
             Integer totalAmount = paramMap.get("totalAmount") == null ? null : Integer.valueOf(paramMap.get("totalAmount"));
             Double totalVolume = paramMap.get("totalVolume") == null ? null : Double.valueOf(paramMap.get("totalVolume"));
             Double totalWeight = paramMap.get("totalWeight") == null ? null : Double.valueOf(paramMap.get("totalWeight"));
@@ -92,8 +92,12 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
                 inStorageForm.setWarehouse(lister);
                 flag = true;
             }
-            if(accountStatus != null) {
-                inStorageForm.setAccountStatus(accountStatus);
+            if(accountStatusstr != null) {
+                if(accountStatusstr.equals("未入账"))
+                    inStorageForm.setAccountStatus(AccountStatus.WRZ);
+                else{
+                    inStorageForm.setAccountStatus(AccountStatus.YRZ);
+                }
                 flag = true;
             }
             if(totalAmount != null) {
