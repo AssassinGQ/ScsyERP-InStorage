@@ -334,7 +334,6 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
     }
 
     @Override
-    @Transactional
     public void complete(Long entityId) {
         if(entityId == null){
             throw new InStorageFormBizException(InStorageFormBizException.INSTORAGEFORMBIZ_PARAMS_ILLEGAL, "入库单基本信息主键不能为空");
