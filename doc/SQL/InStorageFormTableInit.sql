@@ -17,8 +17,6 @@ create table t_in_storage_form (
   truck         BIGINT(20)  NOT NULL                     COMMENT '入库时运输车辆',
   pick_worker   BIGINT(20)  NOT NULL                     COMMENT '提货人',
   lister        BIGINT(20)  NOT NULL                     COMMENT '制单人',
-  drive_workers TEXT                                      COMMENT '行车工们',
-  lift_workers  TEXT                                      COMMENT '起重工们',
   account_status VARCHAR(15)                              COMMENT '记账状态',
   total_amount  INT(4)                                    COMMENT '总件数',
   total_volume  DOUBLE(5,2)                               COMMENT '总体积',

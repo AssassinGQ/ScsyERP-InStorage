@@ -46,8 +46,6 @@
 			truck = #{Truck},
             pick_worker =  #{PickWorker},
             lister =  #{Lister},
-#             drive_workers = #{DriveWorkers,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler},
-#             lift_workers = #{LiftWorkers,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.LongHashSetTypeHandler},
             account_status =  #{AccountStatus,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.AccountStatusHandler},
             total_amount =  #{TotalAmount},
             total_volume =  #{TotalVolume},
