@@ -1,6 +1,7 @@
 package cn.AssassinG.ScsyERP.InStorage.core.biz.impl;
 
 import cn.AssassinG.ScsyERP.BasicInfo.facade.entity.Product;
+import cn.AssassinG.ScsyERP.BasicInfo.facade.enums.ProductStatus;
 import cn.AssassinG.ScsyERP.BasicInfo.facade.service.ProductServiceFacade;
 import cn.AssassinG.ScsyERP.InStorage.core.biz.InStorageFormBiz;
 import cn.AssassinG.ScsyERP.InStorage.core.dao.InStorageFormDao;
@@ -250,6 +251,9 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
         Product product = productServiceFacade.getById(productId);
         if(product == null || product.getIfDeleted()){
             throw new InStorageFormBizException(InStorageFormBizException.INSTORAGEFORMBIZ_NOSUIT_RESULT, "没有符合条件的货物基本信息，entityId: %d", entityId);
+        }
+        if(product.getStatus().getValue() != ProductStatus.DRK.getValue()){
+            throw new InStorageFormBizException(InStorageFormBizException.INSTORAGEFORMBIZ_NOSUIT_RESULT, "该货物已经入库，entityId: %d", product.getId());
         }
         product.setInStorageForm(inStorageForm.getId());
         inStorageForm.getProducts().add(product.getId());
