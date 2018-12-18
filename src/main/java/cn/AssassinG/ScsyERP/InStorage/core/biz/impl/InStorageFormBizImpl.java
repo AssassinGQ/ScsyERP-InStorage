@@ -251,6 +251,7 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
         if(product == null || product.getIfDeleted()){
             throw new InStorageFormBizException(InStorageFormBizException.INSTORAGEFORMBIZ_NOSUIT_RESULT, "没有符合条件的货物基本信息，entityId: %d", entityId);
         }
+        product.setInStorageForm(inStorageForm.getId());
         inStorageForm.getProducts().add(product.getId());
         inStorageForm.setWorkingProduct(product.getId());
         this.update(inStorageForm);
