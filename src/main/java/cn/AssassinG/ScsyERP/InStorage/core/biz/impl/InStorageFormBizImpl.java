@@ -277,6 +277,14 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
         if(product == null || product.getIfDeleted()){
             throw new InStorageFormBizException(InStorageFormBizException.INSTORAGEFORMBIZ_NOSUIT_RESULT, "没有符合条件的货物基本信息，entityId: %d", entityId);
         }
+        if(product.getStatus().getValue() == ProductStatus.DRK.getValue()){
+            throw new InStorageFormBizException(InStorageFormBizException.INSTORAGEFORMBIZ_NOSUIT_RESULT, "该货物尚未入库，entityId: %d", product.getId());
+        }
+        if(product.getStatus().getValue() == ProductStatus.YCK.getValue()){
+            throw new InStorageFormBizException(InStorageFormBizException.INSTORAGEFORMBIZ_NOSUIT_RESULT, "该货物已经出库，entityId: %d", product.getId());
+        }
+        product.setStatus(ProductStatus.DRK);
+        product.setInStorageForm(null);
         inStorageForm.getProducts().remove(product.getId());
         if(inStorageForm.getWorkingProduct().longValue() == product.getId()){
             inStorageForm.setWorkingProduct(null);//todo 如果这个为空，货物定位上传了该怎么办。可以实现setWorkingProduct接口
