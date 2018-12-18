@@ -256,6 +256,7 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
             throw new InStorageFormBizException(InStorageFormBizException.INSTORAGEFORMBIZ_NOSUIT_RESULT, "该货物已经入库，entityId: %d", product.getId());
         }
         product.setInStorageForm(inStorageForm.getId());
+        product.setStatus(ProductStatus.YRK);
         inStorageForm.getProducts().add(product.getId());
         inStorageForm.setWorkingProduct(product.getId());
         this.update(inStorageForm);
@@ -318,6 +319,9 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
             Product product = productServiceFacade.getById(inStorageForm.getWorkingProduct());
             if(product == null || product.getIfDeleted()){
                 throw new InStorageFormBizException(InStorageFormBizException.INSTORAGEFORMBIZ_CANNOTOPERATE, "正在入库的货物已被删除");
+            }
+            if(product.getStatus().getValue() != ProductStatus.YRK.getValue()){
+                throw new InStorageFormBizException(InStorageFormBizException.INSTORAGEFORMBIZ_CANNOTOPERATE, "货物当前不能上传定位信息");
             }
             product.setWarehouseLocation(Location);
             productServiceFacade.update(product);
