@@ -260,6 +260,7 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
         inStorageForm.getProducts().add(product.getId());
         inStorageForm.setWorkingProduct(product.getId());
         this.update(inStorageForm);
+        productServiceFacade.update(product);
     }
 
     @Transactional
@@ -291,6 +292,7 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
             inStorageForm.setWorkingProduct(null);//todo 如果这个为空，货物定位上传了该怎么办。可以实现setWorkingProduct接口
         }
         this.update(inStorageForm);
+        productServiceFacade.update(product);
     }
 
     @Override
