@@ -6,6 +6,7 @@ import cn.AssassinG.ScsyERP.BasicInfo.facade.service.ProductServiceFacade;
 import cn.AssassinG.ScsyERP.InStorage.core.biz.InStorageFormBiz;
 import cn.AssassinG.ScsyERP.InStorage.core.dao.InStorageFormDao;
 import cn.AssassinG.ScsyERP.InStorage.facade.entity.InStorageForm;
+import cn.AssassinG.ScsyERP.InStorage.facade.enums.InStorageFormStatus;
 import cn.AssassinG.ScsyERP.InStorage.facade.exceptions.InStorageFormBizException;
 import cn.AssassinG.ScsyERP.common.core.biz.impl.FormBizImpl;
 import cn.AssassinG.ScsyERP.common.core.dao.BaseDao;
@@ -25,9 +26,16 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
         return this.inStorageFormDao;
     }
 
-    //TODO 从仓库引入行车工，起重工，出库单同理
     @Override
     public Long create(InStorageForm inStorageForm) {
+        if(inStorageForm.getInStorageNumber() == null){
+            inStorageForm.setInStorageNumber(String.valueOf(System.currentTimeMillis()));
+        }
+        if(inStorageForm.getAccountStatus() == null) {
+            inStorageForm.setAccountStatus(cn.AssassinG.ScsyERP.common.enums.AccountStatus.WRZ);
+        }
+        inStorageForm.setInStorageStatus(InStorageFormStatus.Working);
+        inStorageForm.setInStorageTime(new Date());
         ValidUtils.ValidationWithExp(inStorageForm);
         Map<String, Object> queryMap = new HashMap<String, Object>();
         queryMap.put("IfDeleted", false);
@@ -39,7 +47,11 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
         }else if(inStorageForms.size() == 1){
             throw new InStorageFormBizException(InStorageFormBizException.INSTORAGEFORMBIZ_UNKNOWN_ERROR, "当前仓库已经存在一个活跃的入库单，仓库主键：%d", inStorageForms.get(0).getWarehouse());
         }else{
-            return getDao().insert(inStorageForm);
+            Long id = getDao().insert(inStorageForm);
+            if(!inStorageForm.getInStorageNumber().startsWith("rkd")){
+                inStorageForm.setInStorageNumber("rkd" + id);
+            }
+            return id;
         }
     }
 
@@ -258,6 +270,7 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
         }
         product.setInStorageForm(inStorageForm.getId());
         product.setStatus(ProductStatus.YRK);
+        product.setWarehouse(inStorageForm.getWarehouse());
         inStorageForm.getProducts().add(product.getId());
         inStorageForm.setWorkingProduct(product.getId());
         this.update(inStorageForm);
