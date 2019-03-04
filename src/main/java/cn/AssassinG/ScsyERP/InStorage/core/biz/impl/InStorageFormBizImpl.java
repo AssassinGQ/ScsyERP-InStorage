@@ -50,6 +50,7 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
             Long id = getDao().insert(inStorageForm);
             if(!inStorageForm.getInStorageNumber().startsWith("rkd")){
                 inStorageForm.setInStorageNumber("rkd" + id);
+                getDao().update(inStorageForm);
             }
             return id;
         }
