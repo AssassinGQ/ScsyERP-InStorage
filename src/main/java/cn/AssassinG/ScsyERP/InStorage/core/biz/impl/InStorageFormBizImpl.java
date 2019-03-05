@@ -378,6 +378,7 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
         inStorageForm.setTotalVolume(totalVolume);
         inStorageForm.setTotalWeight(totalWeight);
         inStorageForm.setIfCompleted(true);
+        inStorageForm.setInStorageStatus(InStorageFormStatus.Done);
         this.update(inStorageForm);
     }
 }
