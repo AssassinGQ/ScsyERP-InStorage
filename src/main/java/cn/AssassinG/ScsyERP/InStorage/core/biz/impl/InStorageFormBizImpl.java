@@ -35,6 +35,7 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
             inStorageForm.setAccountStatus(cn.AssassinG.ScsyERP.common.enums.AccountStatus.WRZ);
         }
         inStorageForm.setInStorageStatus(InStorageFormStatus.Working);
+        inStorageForm.setProducts(new HashSet<>());
         inStorageForm.setInStorageTime(new Date());
         ValidUtils.ValidationWithExp(inStorageForm);
         Map<String, Object> queryMap = new HashMap<String, Object>();
