@@ -291,7 +291,7 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
             throw new InStorageFormBizException(InStorageFormBizException.INSTORAGEFORMBIZ_NOSUIT_RESULT, "没有符合条件的入库单基本信息，entityId: %d", entityId);
         }
         Product product = productServiceFacade.getById(productId);
-        if(product == null || product.getIfDeleted()){
+        if(product == null){
             throw new InStorageFormBizException(InStorageFormBizException.INSTORAGEFORMBIZ_NOSUIT_RESULT, "没有符合条件的货物基本信息，entityId: %d", entityId);
         }
         if(product.getStatus().getValue() == ProductStatus.DRK.getValue()){
