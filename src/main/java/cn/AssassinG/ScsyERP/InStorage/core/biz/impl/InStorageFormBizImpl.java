@@ -304,7 +304,7 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
         product.setStatus(ProductStatus.DRK);
         product.setInStorageForm(null);
         inStorageForm.getProducts().remove(product.getId());
-        if(inStorageForm.getWorkingProduct().longValue() == product.getId()){
+        if(inStorageForm.getWorkingProduct() != null && inStorageForm.getWorkingProduct().longValue() == product.getId()){
             inStorageForm.setWorkingProduct(null);//todo 如果这个为空，货物定位上传了该怎么办。可以实现setWorkingProduct接口
         }
         this.update(inStorageForm);
@@ -334,15 +334,17 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
             if(inStorageForm.getWorkingProduct() == null){
                 throw new InStorageFormBizException(InStorageFormBizException.INSTORAGEFORMBIZ_CANNOTOPERATE, "请先指定正在入库的货物，入库单主键: %d", inStorageForm.getId());
             }
-            Product product = productServiceFacade.getById(inStorageForm.getWorkingProduct());
-            if(product == null || product.getIfDeleted()){
-                throw new InStorageFormBizException(InStorageFormBizException.INSTORAGEFORMBIZ_CANNOTOPERATE, "正在入库的货物已被删除");
+            if(inStorageForm.getWorkingProduct() != null){
+                Product product = productServiceFacade.getById(inStorageForm.getWorkingProduct());
+                if(product == null || product.getIfDeleted()){
+                    throw new InStorageFormBizException(InStorageFormBizException.INSTORAGEFORMBIZ_CANNOTOPERATE, "正在入库的货物已被删除");
+                }
+                if(product.getStatus().getValue() != ProductStatus.YRK.getValue()){
+                    throw new InStorageFormBizException(InStorageFormBizException.INSTORAGEFORMBIZ_CANNOTOPERATE, "货物当前不能上传定位信息");
+                }
+                product.setWarehouseLocation(Location);
+                productServiceFacade.update(product);
             }
-            if(product.getStatus().getValue() != ProductStatus.YRK.getValue()){
-                throw new InStorageFormBizException(InStorageFormBizException.INSTORAGEFORMBIZ_CANNOTOPERATE, "货物当前不能上传定位信息");
-            }
-            product.setWarehouseLocation(Location);
-            productServiceFacade.update(product);
         }
     }
 
