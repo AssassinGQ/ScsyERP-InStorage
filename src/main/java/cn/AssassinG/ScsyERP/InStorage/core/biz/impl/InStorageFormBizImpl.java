@@ -303,6 +303,8 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
         }
         product.setStatus(ProductStatus.DRK);
         product.setInStorageForm(null);
+        product.setWarehouse(null);
+        product.setWarehouseLocation(null);
         inStorageForm.getProducts().remove(product.getId());
         if(inStorageForm.getWorkingProduct() != null && inStorageForm.getWorkingProduct().longValue() == product.getId()){
             inStorageForm.setWorkingProduct(null);//todo 如果这个为空，货物定位上传了该怎么办。可以实现setWorkingProduct接口
