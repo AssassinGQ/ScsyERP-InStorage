@@ -37,6 +37,7 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
         inStorageForm.setInStorageStatus(InStorageFormStatus.Working);
         inStorageForm.setProducts(new HashSet<>());
         inStorageForm.setInStorageTime(new Date());
+        inStorageForm.setIfCompleted(false);
         ValidUtils.ValidationWithExp(inStorageForm);
         Map<String, Object> queryMap = new HashMap<String, Object>();
         queryMap.put("IfDeleted", false);
