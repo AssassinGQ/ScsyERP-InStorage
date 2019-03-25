@@ -103,15 +103,15 @@ public class InStorageFormBizImpl extends FormBizImpl<InStorageForm> implements 
                 flag = true;
             }
             if(truck != null) {
-                inStorageForm.setWarehouse(truck);
+                inStorageForm.setTruck(truck);
                 flag = true;
             }
             if(pickWorker != null) {
-                inStorageForm.setWarehouse(pickWorker);
+                inStorageForm.setPickWorker(pickWorker);
                 flag = true;
             }
             if(lister != null) {
-                inStorageForm.setWarehouse(lister);
+                inStorageForm.setLister(lister);
                 flag = true;
             }
             if(accountStatus != null) {

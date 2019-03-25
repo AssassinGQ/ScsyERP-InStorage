@@ -44,7 +44,7 @@
             instorage_status = #{InStorageStatus,typeHandler=cn.AssassinG.ScsyERP.InStorage.core.dao.MyBatisHandler.InStorageStatusHandler},
 			warehouse =  #{Warehouse},
 			truck = #{Truck},
-            pick_worker =  #{PickWorker},
+            pick_worker = #{PickWorker},
             lister =  #{Lister},
             account_status =  #{AccountStatus,typeHandler=cn.AssassinG.ScsyERP.common.core.dao.MyBatisTypeHandler.AccountStatusHandler},
             total_amount =  #{TotalAmount},
