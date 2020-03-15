@@ -30,4 +30,4 @@ create table t_in_storage_form (
 alter table t_in_storage_form comment '入库单信息表';
 
 ## 权限的初始化数据
-insert into t_in_storage_form(corporation, project, instorage_status, instorage_number, instorage_time, warehouse, truck, pick_worker, lister, if_completed, products, working_product) values (1, 1, "正在入库", "rkh12345", now(), 1, 1, 1, 1, false, "1,", 1);
+insert into t_in_storage_form(corporation, project, instorage_status, instorage_number, instorage_time, warehouse, truck, pick_worker, lister, if_completed, products, working_product) values (1, 1, "in_storaging", "rkh12345", now(), 1, 1, 1, 1, false, "1,", 1);
